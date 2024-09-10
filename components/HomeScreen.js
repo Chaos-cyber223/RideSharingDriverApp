@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as Location from 'expo-location';
 import { setDriverLocation, setRideRequests } from '../redux/actions';
 import { selectDriverLocation, selectRideRequests } from '../redux/selectors';
+import RideRequestMarker from './RideRequestMarker'; 
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -32,7 +33,6 @@ const HomeScreen = () => {
       timestamp: new Date().toISOString(),
     }));
 
-    // console.log('Generated Ride Requests:', newRideRequests); 
     dispatch(setRideRequests(newRideRequests));
   };
 
@@ -41,12 +41,10 @@ const HomeScreen = () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
         setErrorMsg('Permission to access location was denied');
-        // console.log('Location permission denied');
         return;
       }
 
       let currentLocation = await Location.getCurrentPositionAsync({});
-      // console.log('Current Location:', currentLocation);
       dispatch(setDriverLocation(currentLocation.coords));
 
       generateNearbyRideRequests(currentLocation);
@@ -84,15 +82,7 @@ const HomeScreen = () => {
         )}
 
         {rideRequests.map((ride) => (
-          <Marker
-            key={ride.id}
-            coordinate={{
-              latitude: ride.pickupLocation.latitude,
-              longitude: ride.pickupLocation.longitude,
-            }}
-            title={`Ride request from ${ride.userId}`}
-            description={`Destination: (${ride.destination.latitude}, ${ride.destination.longitude})`}
-          />
+          <RideRequestMarker key={ride.id} ride={ride} />
         ))}
       </MapView>
       {errorMsg && <Text>{errorMsg}</Text>}

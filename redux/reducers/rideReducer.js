@@ -1,6 +1,6 @@
 const initialState = {
-  driverLocation: null, 
-  rideRequests: [], 
+  driverLocation: null,
+  rideRequests: [],
 };
 
 export const rideReducer = (state = initialState, action) => {
@@ -8,12 +8,12 @@ export const rideReducer = (state = initialState, action) => {
     case 'SET_DRIVER_LOCATION':
       return {
         ...state,
-        driverLocation: action.payload, 
+        driverLocation: action.payload,
       };
     case 'SET_RIDE_REQUESTS':
       return {
         ...state,
-        rideRequests: action.payload, 
+        rideRequests: action.payload,
       };
     case 'UPDATE_RIDE_REQUEST_STATUS':
       return {
