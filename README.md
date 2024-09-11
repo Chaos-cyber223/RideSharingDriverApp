@@ -16,12 +16,12 @@ This is a simplified ride-sharing driver mobile application developed using **Re
 - [Node.js](https://nodejs.org/) (under v17)
 - [npm](https://www.npmjs.com/) (v6.x or higher)
 - [Expo CLI](https://docs.expo.dev/get-started/installation/)
-- An iOS or Android device running Expo Go, or an emulator such as **Xcode** (for iOS) or **Android Studio**.
+- An iOS or Android device running Expo Go
 
 ## Installation
 
 1. Clone this repository:
-git clone https://github.com/your-username/RideSharingDriverApp.git
+git clone https://github.com/Chaos-cyber223/RideSharingDriverApp.git
 
 # Navigate to the project directory:
 ```bash
