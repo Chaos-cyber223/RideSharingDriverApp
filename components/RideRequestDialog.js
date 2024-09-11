@@ -2,7 +2,7 @@ import React from 'react';
 import { Dialog, Portal, Button, Paragraph } from 'react-native-paper';
 import { StyleSheet, Text } from 'react-native';
 
-const RideRequestDialog = ({ visible, hideDialog, ride, onAccept, onDecline, onStart, onPickUp, onDropOff }) => {
+const RideRequestDialog = ({ visible, hideDialog, ride, driverId, onAccept, onDecline, onStart, onPickUp, onDropOff }) => {
 
   const getDialogActions = () => {
     switch (ride.status) {
@@ -33,7 +33,7 @@ const RideRequestDialog = ({ visible, hideDialog, ride, onAccept, onDecline, onS
   return (
     <Portal>
       <Dialog visible={visible} onDismiss={hideDialog}>
-        <Dialog.Title>{`Ride Request from ${ride.userId}`}</Dialog.Title> 
+        <Dialog.Title>{`Ride Request from ${ride.userId}`}</Dialog.Title>
         <Dialog.Content>
           <Paragraph>
             <Text style={styles.label}>Pickup Location:</Text> {ride.pickupLocation.latitude}, {ride.pickupLocation.longitude}
@@ -43,6 +43,10 @@ const RideRequestDialog = ({ visible, hideDialog, ride, onAccept, onDecline, onS
           </Paragraph>
           <Paragraph>
             <Text style={styles.label}>Current Status:</Text> {ride.status}
+          </Paragraph>
+          <Paragraph>
+            <Text style={styles.label}>Driver ID:</Text> 
+            {ride.status === 'pending' ? 'Not Assigned Yet' : driverId} {/* 如果状态是 pending，显示 "Not Assigned Yet" */}
           </Paragraph>
         </Dialog.Content>
         <Dialog.Actions>

@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import { Marker } from 'react-native-maps';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux'; // 从 Redux 中获取 driverId
 import { updateRideRequestStatus } from '../redux/actions';
 import RideRequestDialog from './RideRequestDialog';
 
-const RideRequestMarker = ({ ride, driverId }) => {
+const RideRequestMarker = ({ ride }) => {
   const dispatch = useDispatch();
   const [dialogVisible, setDialogVisible] = useState(false);
+  const driverId = useSelector((state) => state.ride.driverId); // 从 Redux 中获取 driverId
 
   const showDialog = () => setDialogVisible(true);
   const hideDialog = () => setDialogVisible(false);
 
   const handleAcceptRide = () => {
-    dispatch(updateRideRequestStatus(ride.id, 'accepted', driverId));
+    dispatch(updateRideRequestStatus(ride.id, 'accepted', driverId)); // 使用 Redux 中的 driverId
     hideDialog();
   };
 
@@ -70,6 +71,7 @@ const RideRequestMarker = ({ ride, driverId }) => {
         visible={dialogVisible}
         hideDialog={hideDialog}
         ride={ride}
+        driverId={driverId} // 传递 Redux 中的 driverId
         onAccept={handleAcceptRide}
         onStart={handleStartRide}
         onPickUp={handlePickUpRide}
