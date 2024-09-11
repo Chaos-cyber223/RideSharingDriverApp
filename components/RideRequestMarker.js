@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { updateRideRequestStatus } from '../redux/actions';
 import RideRequestDialog from './RideRequestDialog';
 
-const RideRequestMarker = ({ ride }) => {
+const RideRequestMarker = ({ ride, driverId }) => {
   const dispatch = useDispatch();
   const [dialogVisible, setDialogVisible] = useState(false);
 
@@ -12,27 +12,27 @@ const RideRequestMarker = ({ ride }) => {
   const hideDialog = () => setDialogVisible(false);
 
   const handleAcceptRide = () => {
-    dispatch(updateRideRequestStatus(ride.id, 'accepted', ride.driverId));
+    dispatch(updateRideRequestStatus(ride.id, 'accepted', driverId));
     hideDialog();
   };
 
   const handleStartRide = () => {
-    dispatch(updateRideRequestStatus(ride.id, 'started', ride.driverId));
-    hideDialog();
-  };
-
-  const handleDeclineRide = () => {
-    dispatch(updateRideRequestStatus(ride.id, 'declined', ride.driverId));
+    dispatch(updateRideRequestStatus(ride.id, 'started', driverId));
     hideDialog();
   };
 
   const handlePickUpRide = () => {
-    dispatch(updateRideRequestStatus(ride.id, 'picked-up', ride.driverId));
+    dispatch(updateRideRequestStatus(ride.id, 'picked-up', driverId));
     hideDialog();
   };
 
   const handleDropOffRide = () => {
-    dispatch(updateRideRequestStatus(ride.id, 'dropped-off', ride.driverId));
+    dispatch(updateRideRequestStatus(ride.id, 'dropped-off', driverId));
+    hideDialog();
+  };
+
+  const handleDeclineRide = () => {
+    dispatch(updateRideRequestStatus(ride.id, 'declined', driverId));
     hideDialog();
   };
 
@@ -40,12 +40,14 @@ const RideRequestMarker = ({ ride }) => {
     switch (ride.status) {
       case 'accepted':
         return 'green';
-      case 'declined':
-        return 'red';
+      case 'started':
+        return 'blue';
       case 'picked-up':
         return 'yellow';
       case 'dropped-off':
-        return 'blue';
+        return 'purple';
+      case 'declined':
+        return 'red';
       default:
         return 'orange';
     }
@@ -69,10 +71,10 @@ const RideRequestMarker = ({ ride }) => {
         hideDialog={hideDialog}
         ride={ride}
         onAccept={handleAcceptRide}
-        onDecline={handleDeclineRide}
         onStart={handleStartRide}
         onPickUp={handlePickUpRide}
         onDropOff={handleDropOffRide}
+        onDecline={handleDeclineRide}
       />
     </>
   );

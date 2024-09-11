@@ -1,6 +1,6 @@
 import React from 'react';
 import { Dialog, Portal, Button, Paragraph } from 'react-native-paper';
-import { View, StyleSheet, Text } from 'react-native';  
+import { StyleSheet, Text } from 'react-native';
 
 const RideRequestDialog = ({ visible, hideDialog, ride, onAccept, onDecline, onStart, onPickUp, onDropOff }) => {
 
@@ -9,21 +9,21 @@ const RideRequestDialog = ({ visible, hideDialog, ride, onAccept, onDecline, onS
       case 'pending':
         return (
           <>
-            <Button onPress={onAccept} style={styles.button}>Accept</Button>
-            <Button onPress={onDecline} style={styles.button}>Decline</Button>
+            <Button onPress={onAccept}>Accept</Button>
+            <Button onPress={onDecline}>Decline</Button>
           </>
         );
       case 'accepted':
         return (
-          <Button onPress={onStart} style={styles.button}>Start Ride</Button>
+          <Button onPress={onStart}>Start Ride</Button>
         );
       case 'started':
         return (
-          <Button onPress={onPickUp} style={styles.button}>Pick Up</Button>
+          <Button onPress={onPickUp}>Pick Up</Button>
         );
       case 'picked-up':
         return (
-          <Button onPress={onDropOff} style={styles.button}>Drop Off</Button>
+          <Button onPress={onDropOff}>Drop Off</Button>
         );
       default:
         return null;
@@ -33,7 +33,7 @@ const RideRequestDialog = ({ visible, hideDialog, ride, onAccept, onDecline, onS
   return (
     <Portal>
       <Dialog visible={visible} onDismiss={hideDialog}>
-        <Dialog.Title>{`Ride Request from ${ride.userId}`}</Dialog.Title>
+        <Dialog.Title>{`Ride Request from ${ride.userId}`}</Dialog.Title> 
         <Dialog.Content>
           <Paragraph>
             <Text style={styles.label}>Pickup Location:</Text> {ride.pickupLocation.latitude}, {ride.pickupLocation.longitude}
@@ -41,10 +41,13 @@ const RideRequestDialog = ({ visible, hideDialog, ride, onAccept, onDecline, onS
           <Paragraph>
             <Text style={styles.label}>Destination:</Text> {ride.destination.latitude}, {ride.destination.longitude}
           </Paragraph>
+          <Paragraph>
+            <Text style={styles.label}>Current Status:</Text> {ride.status}
+          </Paragraph>
         </Dialog.Content>
         <Dialog.Actions>
           {getDialogActions()}
-          <Button onPress={hideDialog} style={styles.button}>Close</Button>
+          <Button onPress={hideDialog}>Close</Button>
         </Dialog.Actions>
       </Dialog>
     </Portal>
@@ -55,9 +58,6 @@ const styles = StyleSheet.create({
   label: {
     fontWeight: 'bold',
     marginBottom: 8,
-  },
-  button: {
-    marginHorizontal: 5,
   },
 });
 

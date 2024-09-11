@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Text, ActivityIndicator } from 'react-native';
+import { View, StyleSheet, ActivityIndicator, Image } from 'react-native'; // 引入 Image 组件
 import MapView, { Marker } from 'react-native-maps';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Location from 'expo-location';
 import { setDriverLocation, setRideRequests } from '../redux/actions';
-import { selectDriverLocation, selectRideRequests } from '../redux/selectors';
 import RideRequestMarker from './RideRequestMarker';
+import driverIcon from '../assets/driverIcon.png';  // 引入司机的图标
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
-  const driverLocation = useSelector(selectDriverLocation);
-  const rideRequests = useSelector(selectRideRequests);
+  const driverLocation = useSelector((state) => state.ride.driverLocation);
+  const rideRequests = useSelector((state) => state.ride.rideRequests);
+  const driverId = useSelector((state) => state.ride.driverId);
   const [errorMsg, setErrorMsg] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -51,7 +52,7 @@ const HomeScreen = () => {
         dispatch(setDriverLocation(currentLocation.coords));
 
         generateNearbyRideRequests(currentLocation);
-        setLoading(false); 
+        setLoading(false);
       } catch (error) {
         setErrorMsg('Error fetching location. Please try again.');
         setLoading(false);
@@ -63,31 +64,6 @@ const HomeScreen = () => {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color="#0000ff" />
-        <Text>Loading current location...</Text>
-      </View>
-    );
-  }
-
-  if (!driverLocation && !errorMsg) {
-    return (
-      <View style={styles.container}>
-        <Text>Loading current location...</Text>
-      </View>
-    );
-  }
-
-  if (errorMsg) {
-    return (
-      <View style={styles.container}>
-        <Text>{errorMsg}</Text>
-      </View>
-    );
-  }
-
-  if (!rideRequests.length) {
-    return (
-      <View style={styles.container}>
-        <Text>No nearby ride requests available.</Text>
       </View>
     );
   }
@@ -110,12 +86,17 @@ const HomeScreen = () => {
               longitude: driverLocation.longitude,
             }}
             title="Driver's Location"
-            pinColor="blue"
-          />
+          >
+            {/* 在 Marker 内部使用 Image 显示自定义图标 */}
+            <Image 
+              source={driverIcon}
+              style={{ width: 40, height: 40 }} // 设置图标的大小
+            />
+          </Marker>
         )}
 
         {rideRequests.map((ride) => (
-          <RideRequestMarker key={ride.id} ride={ride} />
+          <RideRequestMarker key={ride.id} ride={ride} driverId={driverId} />
         ))}
       </MapView>
     </View>

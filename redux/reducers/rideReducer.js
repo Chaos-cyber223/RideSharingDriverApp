@@ -1,5 +1,6 @@
 const initialState = {
   driverLocation: null,
+  driverId: 'driver123', 
   rideRequests: [],
 };
 
@@ -23,7 +24,7 @@ export const rideReducer = (state = initialState, action) => {
             ? { 
                 ...ride, 
                 status: action.payload.status, 
-                driverId: action.payload.driverId || ride.driverId 
+                driverId: action.payload.driverId 
               }
             : ride
         ),
