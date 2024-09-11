@@ -1,12 +1,18 @@
 import React from 'react';
-import { Provider } from 'react-redux';
-import store from './redux/store'; 
-import HomeScreen from './components/HomeScreen'; 
+import { Provider as ReduxProvider } from 'react-redux';
+import { Provider as PaperProvider } from 'react-native-paper';
+import store from './redux/store';  
+import HomeScreen from './components/HomeScreen';  
 
-export default function App() {
+const App = () => {
   return (
-    <Provider store={store}>
-      <HomeScreen />
-    </Provider>
+    <ReduxProvider store={store}>
+      <PaperProvider>
+        <HomeScreen />
+      </PaperProvider>
+    </ReduxProvider>
   );
-}
+};
+
+export default App;
+

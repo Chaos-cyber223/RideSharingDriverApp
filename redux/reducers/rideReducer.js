@@ -20,7 +20,11 @@ export const rideReducer = (state = initialState, action) => {
         ...state,
         rideRequests: state.rideRequests.map((ride) =>
           ride.id === action.payload.rideId
-            ? { ...ride, status: action.payload.status } 
+            ? { 
+                ...ride, 
+                status: action.payload.status, 
+                driverId: action.payload.driverId || ride.driverId 
+              }
             : ride
         ),
       };

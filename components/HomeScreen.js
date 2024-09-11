@@ -51,7 +51,7 @@ const HomeScreen = () => {
         dispatch(setDriverLocation(currentLocation.coords));
 
         generateNearbyRideRequests(currentLocation);
-        setLoading(false); // 停止加载状态
+        setLoading(false); 
       } catch (error) {
         setErrorMsg('Error fetching location. Please try again.');
         setLoading(false);
