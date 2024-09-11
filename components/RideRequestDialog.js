@@ -46,7 +46,7 @@ const RideRequestDialog = ({ visible, hideDialog, ride, driverId, onAccept, onDe
           </Paragraph>
           <Paragraph>
             <Text style={styles.label}>Driver ID:</Text> 
-            {ride.status === 'pending' ? 'Not Assigned Yet' : driverId} {/* 如果状态是 pending，显示 "Not Assigned Yet" */}
+            {ride.status === 'pending' ? 'Not Assigned Yet' : driverId} 
           </Paragraph>
         </Dialog.Content>
         <Dialog.Actions>
