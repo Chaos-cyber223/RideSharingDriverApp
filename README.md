@@ -24,20 +24,23 @@ This is a simplified ride-sharing driver mobile application developed using **Re
 git clone https://github.com/your-username/RideSharingDriverApp.git
 
 # Navigate to the project directory:
+```bash
 cd RideSharingDriverApp
+```
 
 # Install the dependencies:
+```bash
 npm install
+```
 
 # Running the App
 
 1. Start the Expo development server:
+```bash
 npm start
+```
 
-2. After starting the server, you can open the app using the Expo Go app on your physical device or use an emulator:
-iOS: Use your iPhone's camera to scan the QR code displayed in the terminal after running npm start. This will open the Expo Go app, where the app will load. Alternatively, you can start an iOS simulator (Xcode required) by pressing i in the terminal.
-Android: Open the Expo Go app on your Android phone and use the in-app QR code scanner to scan the QR code displayed in the terminal after running npm start. Alternatively, you can start an Android emulator by pressing a in the terminal (Android Studio required).
-
-3. To run the app on an iOS simulator using Xcode, press i in the terminal after running npm start. Ensure Xcode is installed.
-
-4. To run the app on an Android emulator, press a in the terminal after running npm start. Ensure Android Studio and its emulator are configured correctly.
+Open the app using the Expo Go app on your physical device:
+iOS: Use your iPhone's camera to scan the QR code displayed in the terminal after running npm start. This will open the Expo Go app, where the app will load.
+Android: Open the Expo Go app on your Android phone and use the in-app QR code scanner to scan the QR code displayed in the terminal after running npm start.
+Ensure you have the Expo Go app installed on your physical device (available from the App Store or Google Play).
