@@ -40,7 +40,7 @@ npm install
 npm start
 ```
 
-Open the app using the Expo Go app on your physical device:
-iOS: Use your iPhone's camera to scan the QR code displayed in the terminal after running npm start. This will open the Expo Go app, where the app will load.
-Android: Open the Expo Go app on your Android phone and use the in-app QR code scanner to scan the QR code displayed in the terminal after running npm start.
-Ensure you have the Expo Go app installed on your physical device (available from the App Store or Google Play).
+2. Open the app using the Expo Go app on your physical device:
+- iOS: Use your iPhone's camera to scan the QR code displayed in the terminal after running npm start. This will open the Expo Go app, where the app will load.
+- Android: Open the Expo Go app on your Android phone and use the in-app QR code scanner to scan the QR code displayed in the terminal after running npm start.
+- Ensure you have the Expo Go app installed on your physical device (available from the App Store or Google Play).
